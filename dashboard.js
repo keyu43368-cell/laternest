@@ -403,7 +403,7 @@ function createTodoCard(todo) {
       <div class="ln-title-cell tag-content todo-main">
         <div class="ln-title-text">
           <a class="ln-title tag-title todo-title" target="_blank" rel="noreferrer"></a>
-          <span class="ln-subtitle">${todo.note || "保存自稍后细品。"}</span>
+          <span class="ln-subtitle"></span>
         </div>
       </div>
       <span class="ln-pill category-hash category-${todo.category}"></span>
@@ -419,6 +419,9 @@ function createTodoCard(todo) {
   const title = card.querySelector(".todo-title");
   title.href = todo.url;
   title.textContent = todo.title;
+  const subtitle = card.querySelector(".ln-subtitle");
+  subtitle.textContent = todo.note;
+  subtitle.hidden = !todo.note;
   card.querySelector(".category-hash").textContent = LaterList.getCategoryLabel(todo.category);
   return card;
 }
