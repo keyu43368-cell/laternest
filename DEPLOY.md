@@ -72,7 +72,7 @@ Upload `dist/laternest-extension.zip` to GitHub Releases.
 Before every public push:
 
 ```bash
-rg -n "open-apis/bot/v2/hook/[A-Za-z0-9_-]{8,}|ghp_|github_pat_|token|secret|password|/Users/|qr\\.png|chrome-storage-export" .
+rg -n -g '!DEPLOY.md' "open-apis/bot/v2/hook/[A-Za-z0-9_-]{8,}|ghp_|github_pat_|token|secret|password|/Users/|qr\\.png|chrome-storage-export" .
 ```
 
 The command should not reveal any real secrets or personal data.

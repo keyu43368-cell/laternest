@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>稍后细品 LaterNest | 本地优先的网页稍后阅读工作台</title>
+    <title>LaterNest | A local-first read-later workspace</title>
     <style>
       :root {
         --bg: #f8f9fa;
@@ -28,7 +28,7 @@
         margin: 0;
         background: var(--bg);
         color: var(--ink);
-        font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+        font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         letter-spacing: 0;
       }
 
@@ -158,7 +158,8 @@
         box-shadow: 0 34px 90px rgba(0, 0, 0, 0.1);
       }
 
-      .hero-shot img {
+      .hero-shot img,
+      .screenshot img {
         display: block;
         width: 100%;
       }
@@ -222,11 +223,6 @@
         border: 1px solid var(--line);
         border-radius: 18px;
         background: var(--surface);
-      }
-
-      .screenshot img {
-        display: block;
-        width: 100%;
       }
 
       .screenshot-row {
@@ -322,84 +318,84 @@
           <img src="assets/laternest-logo.png" alt="">
           <span>LaterNest</span>
         </a>
-        <nav class="nav" aria-label="页面导航">
-          <a href="#features">功能</a>
-          <a href="#privacy">隐私</a>
-          <a href="#install">安装</a>
-          <a class="lang" href="en.html">English</a>
+        <nav class="nav" aria-label="Page navigation">
+          <a href="#features">Features</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#install">Install</a>
+          <a class="lang" href="index.html">中文</a>
         </nav>
       </header>
 
       <main>
         <section class="hero">
           <div>
-            <span class="eyebrow">本地优先的 Chrome 稍后阅读工作台</span>
-            <h1>把值得稍后看的网页，带回真正会整理的地方。</h1>
-            <p class="lead">稍后细品 LaterNest 帮你把当前网页保存成待处理内容，再用时间线、周视图和批量整理，把收藏变成真正可回看的工作流。</p>
+            <span class="eyebrow">A local-first Chrome read-later workspace</span>
+            <h1>Bring saved links back into a place you actually review.</h1>
+            <p class="lead">LaterNest turns the current tab into a calm reading queue, then gives you timeline, week view, categories, and bulk triage to make saved links actionable again.</p>
             <div class="actions">
-              <a class="button" href="#install">从源码安装</a>
-              <a class="button secondary" href="product-introduction.md">阅读产品故事</a>
+              <a class="button" href="#install">Install from source</a>
+              <a class="button secondary" href="product-introduction.md">Read the story</a>
             </div>
           </div>
           <figure class="hero-shot">
-            <img src="assets/screenshot-dashboard-timeline.png" alt="LaterNest 时间线视图截图">
+            <img src="assets/screenshot-dashboard-timeline.png" alt="LaterNest timeline view screenshot">
           </figure>
         </section>
 
         <section class="section">
           <div class="section-header">
-            <h2>收藏不是终点，回来整理才是。</h2>
-            <p>浏览器收藏夹太重，聊天转发太散，传统稍后读工具又常常只解决“保存”。LaterNest 把网页先放进一个安静的收件箱，让你在合适的时间重新看见、整理并完成。</p>
+            <h2>Saving is easy. Returning is the hard part.</h2>
+            <p>Bookmarks become heavy, chat messages scatter, and many read-later tools stop at capture. LaterNest gives links a quiet inbox and a workflow for coming back, reviewing, and clearing them.</p>
           </div>
         </section>
 
         <section class="section" id="features">
           <div class="section-header">
-            <h2>为反复整理而设计。</h2>
-            <p>LaterNest 保持克制：不抓全文、不做账号、不制造新的信息流，只提供保存、分组、回看和清理所需的界面。</p>
+            <h2>Designed for repeated triage.</h2>
+            <p>LaterNest stays intentionally small: no article scraping, no account system, no new feed. Just the surfaces needed to save, group, review, and clean up links.</p>
           </div>
           <div class="feature-grid">
             <article class="feature">
-              <strong>快速保存</strong>
-              <p>保存当前网页标题、URL、来源域名、备注、分类和待看时间。</p>
+              <strong>Quick save</strong>
+              <p>Capture title, URL, domain, note, category, and reminder time from the active tab.</p>
             </article>
             <article class="feature">
-              <strong>时间线与周视图</strong>
-              <p>按日期回看，也可以切到一周视角，把积累的内容集中梳理出来。</p>
+              <strong>Timeline and week view</strong>
+              <p>Review by date, or switch into a weekly planner to see what has accumulated.</p>
             </article>
             <article class="feature">
-              <strong>批量整理</strong>
-              <p>对多条链接执行完成、延后、删除等操作，快速清理积压内容。</p>
+              <strong>Bulk cleanup</strong>
+              <p>Complete, postpone, or delete multiple saved links without turning cleanup into another chore.</p>
             </article>
             <article class="feature">
-              <strong>分类统计</strong>
-              <p>工作、学习、娱乐和状态计数都在侧边栏里清晰展示。</p>
+              <strong>Category counts</strong>
+              <p>Work, Study, Fun, and status totals stay visible in the sidebar.</p>
             </article>
             <article class="feature">
-              <strong>精品收藏</strong>
-              <p>把最值得回看的链接标记出来，让高价值内容不再被淹没。</p>
+              <strong>Favorites</strong>
+              <p>Mark the links worth returning to so high-value items do not disappear into the queue.</p>
             </article>
             <article class="feature">
-              <strong>可选同步</strong>
-              <p>如果你主动配置 Feishu/Lark Webhook，可以把未看清单同步到自己的机器人。</p>
+              <strong>Optional sync</strong>
+              <p>If you configure a Feishu/Lark webhook, LaterNest can send pending links to your own bot.</p>
             </article>
           </div>
         </section>
 
         <section class="section showcase">
           <div class="section-header">
-            <h2>从当天收件箱，到一周整理。</h2>
-            <p>公开展示截图全部使用匿名示例数据，不包含真实网页标题、Webhook、浏览记录或私人链接。</p>
+            <h2>From today’s inbox to a weekly review.</h2>
+            <p>All public screenshots use fictional sample data. They do not include real page titles, webhooks, browsing history, or private links.</p>
           </div>
           <figure class="screenshot">
-            <img src="assets/screenshot-dashboard-week.png" alt="LaterNest 周视图截图">
+            <img src="assets/screenshot-dashboard-week.png" alt="LaterNest week view screenshot">
           </figure>
           <div class="screenshot-row">
             <figure class="screenshot">
-              <img src="assets/screenshot-dashboard-timeline.png" alt="LaterNest 时间线截图">
+              <img src="assets/screenshot-dashboard-timeline.png" alt="LaterNest timeline screenshot">
             </figure>
             <figure class="screenshot">
-              <img src="assets/screenshot-popup.png" alt="LaterNest 弹窗截图">
+              <img src="assets/screenshot-popup.png" alt="LaterNest popup screenshot">
             </figure>
           </div>
         </section>
@@ -407,22 +403,22 @@
         <section class="section privacy" id="privacy">
           <span class="privacy-dot" aria-hidden="true"></span>
           <div>
-            <h2>本地优先，不默认上传。</h2>
-            <p>LaterNest 没有账号系统，也没有远程数据库。你的保存内容默认留在自己的 Chrome 本地存储里。只有当你主动配置 Feishu/Lark Webhook 时，未看清单才会发送到你自己的机器人。</p>
+            <h2>Local-first by default.</h2>
+            <p>LaterNest has no account system and no hosted database. Saved links stay in your browser through Chrome local storage. Data is only sent out if you explicitly configure a Feishu/Lark webhook.</p>
           </div>
         </section>
 
         <section class="section install" id="install">
           <div>
-            <h2>从 GitHub 源码安装。</h2>
-            <p>当前版本推荐用 Chrome 开发者模式加载。它适合自己使用、fork 修改，也适合先作为本地工具试用。</p>
+            <h2>Install from GitHub source.</h2>
+            <p>The current version is meant to be loaded in Chrome Developer Mode. It is easy to try, fork, and adapt as a personal local tool.</p>
           </div>
           <ol class="steps">
-            <li>下载或 clone 这个 GitHub 仓库。</li>
-            <li>打开 <code>chrome://extensions/</code>。</li>
-            <li>开启右上角「开发者模式」。</li>
-            <li>点击「加载已解压的扩展程序」。</li>
-            <li>选择 LaterNest 仓库文件夹。</li>
+            <li>Download or clone this GitHub repository.</li>
+            <li>Open <code>chrome://extensions/</code>.</li>
+            <li>Enable Developer Mode.</li>
+            <li>Click Load unpacked.</li>
+            <li>Select the LaterNest repository folder.</li>
           </ol>
         </section>
       </main>

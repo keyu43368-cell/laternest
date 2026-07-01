@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LaterNest Demo Screens</title>
+    <style>
+      :root {
+        --bg: #f8f9fa;
+        --surface: #fdfdfd;
+        --ink: #1c1c1e;
+        --muted: #74767d;
+        --faint: #9a9ca3;
+        --gold: #c2a878;
+        --line: rgba(0, 0, 0, 0.06);
+        --line-soft: rgba(0, 0, 0, 0.04);
+        --selected: #f3f3f5;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #eef0f2;
+        color: var(--ink);
+        font: 14px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+        letter-spacing: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .screen {
+        width: 1440px;
+        min-height: 920px;
+        background: var(--bg);
+      }
+
+      .app-shell {
+        display: grid;
+        grid-template-columns: 192px minmax(0, 1fr);
+        min-height: 920px;
+      }
+
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid var(--line);
+        background: color-mix(in srgb, var(--surface) 82%, var(--bg) 18%);
+        padding: 28px 14px 24px;
+      }
+
+      .brand {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        margin-bottom: 34px;
+        color: #0f1011;
+        font-size: 22px;
+        font-weight: 850;
+      }
+
+      .brand img {
+        width: 92px;
+        height: 108px;
+        object-fit: contain;
+      }
+
+      .nav-section {
+        display: grid;
+        gap: 4px;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--line-soft);
+      }
+
+      .nav-item {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        min-height: 42px;
+        border-radius: 12px;
+        color: var(--ink);
+        font-weight: 760;
+        padding: 0 12px;
+      }
+
+      .nav-item.is-active {
+        background: var(--selected);
+      }
+
+      .count {
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .settings {
+        margin-top: auto;
+        min-height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--surface);
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+      }
+
+      .main {
+        min-width: 0;
+        padding: 32px 42px 44px 50px;
+      }
+
+      .header {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 404px;
+        align-items: center;
+        gap: 22px;
+      }
+
+      .title {
+        margin: 0;
+        color: #0e0f0e;
+        font-size: 30px;
+        font-weight: 850;
+        line-height: 1.25;
+      }
+
+      .search {
+        min-height: 48px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--surface);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 14px;
+        color: var(--muted);
+        font-weight: 650;
+      }
+
+      .tabs {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 36px 0 28px;
+      }
+
+      .status-tabs,
+      .view-tabs {
+        display: inline-flex;
+        align-items: center;
+        gap: 22px;
+      }
+
+      .status-tab {
+        position: relative;
+        color: var(--muted);
+        font-weight: 800;
+      }
+
+      .status-tab.active {
+        color: var(--ink);
+      }
+
+      .status-tab.active::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -9px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--ink);
+        transform: translateX(-50%);
+      }
+
+      .view-tab {
+        min-height: 36px;
+        border-radius: 999px;
+        background: #f1f2f4;
+        display: inline-flex;
+        align-items: center;
+        padding: 0 16px;
+        font-weight: 800;
+      }
+
+      .view-tab.active {
+        background: var(--ink);
+        color: #fff;
+      }
+
+      .bulkbar {
+        position: sticky;
+        top: 16px;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 58px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(253, 253, 253, 0.9);
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.08);
+        padding: 0 18px;
+        margin: -8px 0 22px;
+        backdrop-filter: blur(18px);
+      }
+
+      .bulk-left,
+      .bulk-actions {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .bulk-left {
+        color: var(--muted);
+        font-weight: 760;
+      }
+
+      .checkbox {
+        width: 18px;
+        height: 18px;
+        border: 1px solid rgba(28, 28, 30, 0.24);
+        border-radius: 5px;
+      }
+
+      .bulk-selected {
+        color: var(--muted);
+        font-weight: 800;
+      }
+
+      .bulk-actions span {
+        font-weight: 800;
+      }
+
+      .bulk-actions span:last-child {
+        color: #a04a3b;
+      }
+
+      .timeline {
+        display: grid;
+      }
+
+      .timeline-section {
+        display: grid;
+        gap: 12px;
+        padding: 0 0 30px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        margin-bottom: 30px;
+      }
+
+      .date {
+        position: sticky;
+        top: 32px;
+        z-index: 2;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 28px;
+      }
+
+      .date-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
+
+      .date strong {
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 760;
+      }
+
+      .stack {
+        display: grid;
+        gap: 20px;
+      }
+
+      .row {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(320px, 1.8fr) minmax(96px, 0.55fr) minmax(170px, 0.72fr) minmax(110px, 0.42fr) 54px;
+        align-items: center;
+        gap: 18px;
+        min-height: 104px;
+        border-radius: 14px;
+        transition: background 160ms ease;
+      }
+
+      .row:hover,
+      .row.is-selected {
+        background: color-mix(in srgb, var(--selected) 72%, transparent);
+      }
+
+      .row-check {
+        position: absolute;
+        left: -28px;
+        top: 50%;
+        opacity: 0;
+        transform: translateY(-50%);
+      }
+
+      .row.is-selected .row-check {
+        opacity: 1;
+      }
+
+      .row h3 {
+        overflow: hidden;
+        margin: 0;
+        color: #0e0f0e;
+        font-size: 16px;
+        line-height: 1.35;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .row p {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 650;
+      }
+
+      .pill {
+        justify-self: start;
+        border-radius: 999px;
+        background: #f1f2f4;
+        padding: 7px 16px;
+        font-weight: 800;
+      }
+
+      .domain,
+      .time {
+        color: var(--muted);
+        font-size: 15px;
+        font-weight: 650;
+      }
+
+      .star {
+        color: var(--muted);
+        font-size: 28px;
+        line-height: 1;
+      }
+
+      .week-header {
+        display: inline-flex;
+        align-items: center;
+        justify-self: start;
+        gap: 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--surface);
+        padding: 7px 10px;
+        margin-bottom: 18px;
+      }
+
+      .week-nav {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--selected);
+        display: grid;
+        place-items: center;
+        font-size: 20px;
+        font-weight: 800;
+      }
+
+      .week-current {
+        min-height: 28px;
+        border-radius: 999px;
+        background: var(--selected);
+        display: inline-flex;
+        align-items: center;
+        padding: 0 12px;
+        font-weight: 800;
+      }
+
+      .week-grid {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(142px, 1fr));
+        overflow: hidden;
+      }
+
+      .week-column {
+        min-height: 520px;
+        border-left: 1px solid var(--line);
+        padding: 0 12px 16px;
+      }
+
+      .week-column:first-child {
+        border-left: 0;
+      }
+
+      .week-column h2 {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        min-height: 36px;
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+        margin: 0 0 14px;
+        padding: 0 0 10px;
+        font-size: 14px;
+      }
+
+      .week-column.today h2 {
+        border-bottom: 0;
+        border-radius: 999px;
+        background: var(--ink);
+        color: #fff;
+        padding: 8px 12px;
+      }
+
+      .week-card {
+        height: 54px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        font-weight: 760;
+        line-height: 1.35;
+      }
+
+      .popup-shot {
+        width: 420px;
+        min-height: 620px;
+        background: var(--bg);
+        padding: 22px;
+      }
+
+      .popup-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--line);
+        padding: 10px 0 22px;
+      }
+
+      .popup-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 22px;
+        font-weight: 850;
+      }
+
+      .popup-brand img {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+      }
+
+      .popup-footer {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-bottom: 1px solid var(--line);
+        margin: 18px 0;
+        padding-bottom: 14px;
+      }
+
+      .footer-tab {
+        color: var(--muted);
+        font-weight: 800;
+        text-align: center;
+      }
+
+      .footer-tab.active {
+        color: var(--ink);
+      }
+
+      .page-card,
+      .save-form,
+      .recent {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface);
+        padding: 18px;
+      }
+
+      .page-card h2 {
+        margin: 10px 0 0;
+        font-size: 18px;
+        line-height: 1.35;
+      }
+
+      .form-field {
+        display: grid;
+        gap: 8px;
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 760;
+      }
+
+      .input {
+        min-height: 42px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .primary {
+        display: grid;
+        place-items: center;
+        min-height: 44px;
+        border-radius: 10px;
+        background: var(--ink);
+        color: #fff;
+        font-weight: 850;
+        margin-top: 14px;
+      }
+
+      .recent {
+        margin-top: 12px;
+      }
+
+      .recent h2 {
+        margin: 0 0 10px;
+        font-size: 14px;
+      }
+
+      .recent-item {
+        border-top: 1px solid var(--line);
+        padding-top: 10px;
+        font-weight: 760;
+      }
+
+      .capture {
+        margin: 0;
+      }
+
+      .capture + .capture {
+        margin-top: 48px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="capture screen" id="timeline-shot" aria-label="LaterNest timeline demo">
+      <div class="app-shell">
+        <aside class="sidebar">
+          <div class="brand">
+            <img src="assets/laternest-logo.png" alt="">
+            <span>LaterNest</span>
+          </div>
+          <nav>
+            <div class="nav-section">
+              <div class="nav-item is-active"><span>收件箱</span><span class="count">9</span></div>
+              <div class="nav-item"><span>精品</span><span class="count">3</span></div>
+              <div class="nav-item"><span>全部内容</span><span class="count">24</span></div>
+            </div>
+            <div class="nav-section">
+              <div class="nav-item"><span>工作</span><span class="count">8</span></div>
+              <div class="nav-item"><span>学习</span><span class="count">11</span></div>
+              <div class="nav-item"><span>娱乐</span><span class="count">5</span></div>
+            </div>
+            <div class="nav-section">
+              <div class="nav-item"><span>已完成</span><span class="count">12</span></div>
+              <div class="nav-item"><span>回收站</span><span class="count">2</span></div>
+            </div>
+          </nav>
+          <div class="settings">设置</div>
+        </aside>
+        <main class="main">
+          <header class="header">
+            <h1 class="title">收件箱</h1>
+            <div class="search">⌕ 搜索你保存的内容... <span style="margin-left:auto">⌘K</span></div>
+          </header>
+          <div class="tabs">
+            <div class="status-tabs">
+              <span class="status-tab">全部</span>
+              <span class="status-tab active">未看</span>
+              <span class="status-tab">已看</span>
+            </div>
+            <div class="view-tabs">
+              <span class="view-tab active">时间线</span>
+              <span class="view-tab">周视图</span>
+            </div>
+          </div>
+          <section class="bulkbar">
+            <div class="bulk-left"><span class="checkbox"></span><span>选择当前结果</span></div>
+            <span class="bulk-selected">已选 2 项</span>
+            <div class="bulk-actions"><span>取消</span><span>完成</span><span>明天</span><span>本周</span><span>删除</span></div>
+          </section>
+          <div class="timeline">
+            <section class="timeline-section">
+              <div class="date"><span class="date-dot"></span><strong>今天</strong></div>
+              <div class="stack">
+                <article class="row is-selected">
+                  <span class="row-check checkbox"></span>
+                  <div><h3>保存一篇关于深度工作的文章</h3><p>保存自稍后细品。</p></div>
+                  <span class="pill">学习</span><span class="domain">docs.example</span><span class="time">24 分钟前</span><span class="star">☆</span>
+                </article>
+                <article class="row">
+                  <span class="row-check checkbox"></span>
+                  <div><h3>整理一组产品灵感和设计模式</h3><p>下班前回看，挑 3 条留下。</p></div>
+                  <span class="pill">工作</span><span class="domain">design-notes.example</span><span class="time">2 小时前</span><span class="star">★</span>
+                </article>
+              </div>
+            </section>
+            <section class="timeline-section">
+              <div class="date"><span class="date-dot"></span><strong>06.30 周二</strong></div>
+              <div class="stack">
+                <article class="row">
+                  <span class="row-check checkbox"></span>
+                  <div><h3>一份关于浏览器插件发布的清单</h3><p>适合发布前检查隐私和权限。</p></div>
+                  <span class="pill">工作</span><span class="domain">example.com</span><span class="time">昨天</span><span class="star">☆</span>
+                </article>
+                <article class="row">
+                  <span class="row-check checkbox"></span>
+                  <div><h3>周末想看的轻量纪录片目录</h3><p>放到周视图，周六再看。</p></div>
+                  <span class="pill">娱乐</span><span class="domain">watch.example</span><span class="time">昨天</span><span class="star">☆</span>
+                </article>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <section class="capture screen" id="week-shot" aria-label="LaterNest week demo">
+      <div class="app-shell">
+        <aside class="sidebar">
+          <div class="brand">
+            <img src="assets/laternest-logo.png" alt="">
+            <span>LaterNest</span>
+          </div>
+          <nav>
+            <div class="nav-section">
+              <div class="nav-item"><span>收件箱</span><span class="count">9</span></div>
+              <div class="nav-item"><span>精品</span><span class="count">3</span></div>
+              <div class="nav-item is-active"><span>全部内容</span><span class="count">24</span></div>
+            </div>
+            <div class="nav-section">
+              <div class="nav-item"><span>工作</span><span class="count">8</span></div>
+              <div class="nav-item"><span>学习</span><span class="count">11</span></div>
+              <div class="nav-item"><span>娱乐</span><span class="count">5</span></div>
+            </div>
+          </nav>
+          <div class="settings">设置</div>
+        </aside>
+        <main class="main">
+          <header class="header">
+            <h1 class="title">周视图</h1>
+            <div class="search">⌕ 搜索你保存的内容... <span style="margin-left:auto">⌘K</span></div>
+          </header>
+          <div class="tabs">
+            <div class="status-tabs">
+              <span class="status-tab active">全部</span>
+              <span class="status-tab">未看</span>
+              <span class="status-tab">已看</span>
+            </div>
+            <div class="view-tabs">
+              <span class="view-tab">时间线</span>
+              <span class="view-tab active">周视图</span>
+            </div>
+          </div>
+          <div class="week-header">
+            <span class="week-nav">&lt;</span>
+            <strong>第 27 周 | 06.29 - 07.05</strong>
+            <span class="week-nav">&gt;</span>
+            <span class="week-current">回到本周</span>
+          </div>
+          <section class="week-grid">
+            <div class="week-column"><h2>周一 <small>06.29</small></h2><div class="week-card">插件发布前权限检查</div><div class="week-card">整理公开 README</div></div>
+            <div class="week-column"><h2>周二 <small>06.30</small></h2><div class="week-card">本地优先产品设计笔记</div></div>
+            <div class="week-column today"><h2>周三 <small>07.01</small></h2><div class="week-card">保存一篇关于深度工作的文章</div><div class="week-card">整理一组产品灵感和设计模式</div></div>
+            <div class="week-column"><h2>周四 <small>07.02</small></h2><div class="week-card">Chrome Web Store 上架清单</div></div>
+            <div class="week-column"><h2>周五 <small>07.03</small></h2><div class="week-card">周报素材回看</div></div>
+            <div class="week-column"><h2>周六 <small>07.04</small></h2><div class="week-card">周末想看的轻量纪录片目录</div></div>
+            <div class="week-column"><h2>周日 <small>07.05</small></h2><div class="week-card">复盘收藏夹清理策略</div></div>
+          </section>
+        </main>
+      </div>
+    </section>
+
+    <section class="capture popup-shot" id="popup-shot" aria-label="LaterNest popup demo">
+      <header class="popup-header">
+        <div class="popup-brand"><img src="assets/laternest-logo.png" alt=""><strong>LaterNest</strong></div>
+        <span style="font-size:24px">⌘</span>
+      </header>
+      <nav class="popup-footer">
+        <span class="footer-tab active">快速保存</span>
+        <span class="footer-tab">全部内容</span>
+        <span class="footer-tab">设置</span>
+      </nav>
+      <section class="page-card">
+        <p style="margin:0;color:var(--muted);font-size:13px">docs.example</p>
+        <h2>一篇值得稍后细看的产品文章</h2>
+      </section>
+      <section class="save-form" style="margin-top:14px">
+        <div class="form-field"><span>备注</span><div class="input"></div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="form-field"><span>分类</span><div class="input"></div></div>
+          <div class="form-field"><span>待看时间</span><div class="input"></div></div>
+        </div>
+        <div class="primary">保存当前页面</div>
+      </section>
+      <section class="recent">
+        <h2>最近未看 <span style="float:right;color:var(--muted)">3</span></h2>
+        <div class="recent-item">保存一篇关于深度工作的文章<br><small style="color:var(--muted)">学习 · docs.example</small></div>
+      </section>
+    </section>
+  </body>
+</html>
