@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>稍后细品</title>
+    <link rel="icon" href="icons/icon48.png" type="image/png">
+    <link rel="stylesheet" href="laternest-ui.css">
+    <link rel="stylesheet" href="popup.css">
+    <script src="shared.js" defer></script>
+    <script src="popup.js" defer></script>
+  </head>
+  <body>
+    <main class="popup-shell">
+      <header class="popup-header">
+        <div class="ln-brand">
+          <span class="ln-logo" aria-hidden="true">
+            <img src="assets/laternest-logo.png" alt="">
+          </span>
+          <strong>LaterNest</strong>
+        </div>
+        <button class="ln-icon-button" id="openOptions" title="设置" type="button" aria-label="设置">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 8.5a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7Z" fill="none" stroke="currentColor" stroke-width="1.7"/>
+            <path d="M19 13.5v-3l-2.1-.4c-.2-.5-.4-1-.7-1.4l1.2-1.8-2.1-2.1-1.8 1.2c-.5-.2-.9-.4-1.5-.5L11.5 3h-3L8.1 5.1c-.5.2-1 .4-1.4.7L4.9 4.6 2.8 6.7 4 8.5c-.2.5-.4.9-.5 1.5L1.5 10.5v3l2.1.4c.2.5.4 1 .7 1.4l-1.2 1.8 2.1 2.1 1.8-1.2c.5.2.9.4 1.5.5l.4 2.1h3l.4-2.1c.5-.2 1-.4 1.4-.7l1.8 1.2 2.1-2.1-1.2-1.8c.2-.5.4-.9.5-1.5l2.1-.4Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </header>
+
+      <footer class="popup-footer">
+        <button type="button" class="footer-nav is-active" id="quickSave">快速保存</button>
+        <button type="button" class="footer-nav" id="openDashboard">全部内容</button>
+        <button type="button" class="footer-nav" data-open-options>设置</button>
+      </footer>
+
+      <section class="popup-empty" id="emptyState" aria-label="空状态">
+        <svg class="sleep-bird" viewBox="0 0 220 150" role="img" aria-label="睡在巢里的小鸟">
+          <g class="zzz-group">
+            <text class="zzz zzz-one" x="142" y="44">Z</text>
+            <text class="zzz zzz-two" x="154" y="29">Z</text>
+            <text class="zzz zzz-three" x="167" y="16">Z</text>
+          </g>
+          <path d="M47 103c34 18 88 18 126 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <path d="M58 92c31 16 77 16 110 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M65 82c26 12 68 13 96 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M78 68c6-26 43-31 56-7 18 2 31 14 31 31H73c0-10 2-18 5-24Z" fill="var(--ln-surface)" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
+          <path d="M105 79c4 7 12 11 22 11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M95 70c3 3 6 3 9 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M74 75l-11-4 9 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M165 76l12-6-8 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h1>还没有保存任何内容</h1>
+        <p>在浏览时点击保存，内容就会在这里出现。</p>
+      </section>
+
+      <section class="page-card" id="pageCard">
+        <div class="page-card-top">
+          <p class="domain" id="pageDomain">正在读取当前页面...</p>
+          <span class="saved-badge" id="savedBadge" hidden>当前页面已保存</span>
+        </div>
+        <h2 id="pageTitle">稍候</h2>
+      </section>
+
+      <form id="saveForm" class="save-form">
+        <label>
+          <span>备注</span>
+          <textarea id="noteInput" rows="3" placeholder="为什么值得稍后细看？"></textarea>
+        </label>
+        <div class="form-grid">
+          <label>
+            <span>分类</span>
+            <select id="categoryInput">
+              <option value="work">工作</option>
+              <option value="study" selected>学习</option>
+              <option value="fun">娱乐</option>
+            </select>
+          </label>
+          <label>
+            <span>待看时间</span>
+            <select id="reminderPreset">
+              <option value="today" selected>今天</option>
+              <option value="tomorrow">明天</option>
+              <option value="week">本周</option>
+            </select>
+          </label>
+        </div>
+        <button class="ln-button ln-button-primary" type="submit">保存当前页面</button>
+      </form>
+
+      <p class="status" id="status" role="status"></p>
+
+      <section class="recent-section">
+        <div class="section-title">
+          <h2>最近未看</h2>
+          <span id="recentCount">0</span>
+        </div>
+        <div class="recent-list" id="recentList"></div>
+      </section>
+    </main>
+  </body>
+</html>

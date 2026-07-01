@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "稍后细品 LaterList",
+  "version": "0.1.0",
+  "description": "把当前网页保存成稍后细看的链接 Todo，并定时同步到飞书。",
+  "permissions": [
+    "tabs",
+    "storage",
+    "alarms",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://open.feishu.cn/*"
+  ],
+  "action": {
+    "default_title": "稍后细品",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

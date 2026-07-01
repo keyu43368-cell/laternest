@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>飞书同步设置</title>
+    <link rel="icon" href="icons/icon48.png" type="image/png">
+    <link rel="stylesheet" href="laternest-ui.css">
+    <link rel="stylesheet" href="options.css">
+    <script src="shared.js" defer></script>
+    <script src="options.js" defer></script>
+  </head>
+  <body>
+    <main class="options-app">
+      <aside class="settings-sidebar" aria-label="设置导航">
+        <div class="window-dots" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="ln-brand ln-brand-stack settings-brand">
+          <span class="ln-logo" aria-hidden="true">
+            <img src="assets/laternest-logo.png" alt="">
+          </span>
+          <strong>LaterNest</strong>
+        </div>
+        <nav class="settings-nav">
+          <p>通用</p>
+          <button class="active" type="button">飞书同步设置</button>
+          <button type="button">外观</button>
+          <button type="button">快捷键</button>
+          <p>集成</p>
+          <button type="button">Webhook</button>
+          <button type="button">浏览器</button>
+          <p>关于</p>
+          <button type="button">帮助与反馈</button>
+        </nav>
+      </aside>
+
+      <section class="settings-content">
+        <header class="settings-header">
+          <button class="ln-button ln-button-soft back-button" id="backHome" type="button">返回主页</button>
+          <p class="eyebrow">LaterList Settings</p>
+          <h1>飞书同步设置</h1>
+        </header>
+
+        <form id="settingsForm" class="settings-panel">
+          <section aria-labelledby="baseTitle">
+            <h2 id="baseTitle">基础</h2>
+            <div class="ln-setting-row">
+              <div>
+                <strong>飞书 Webhook URL</strong>
+                <span>用于把未看链接发送到你的飞书机器人。</span>
+              </div>
+              <input class="ln-input" id="webhookUrl" type="url" placeholder="https://open.feishu.cn/open-apis/bot/v2/hook/...">
+            </div>
+
+            <div class="ln-setting-row">
+              <div>
+                <strong>每日自动同步</strong>
+                <span>开启后会按指定时间同步未看链接。</span>
+              </div>
+              <label class="ln-toggle">
+                <input id="dailySyncEnabled" type="checkbox">
+                <span></span>
+              </label>
+            </div>
+
+            <div class="ln-setting-row">
+              <div>
+                <strong>同步时间</strong>
+                <span>每天触发飞书同步的本地时间。</span>
+              </div>
+              <input class="ln-input compact-control" id="dailySyncTime" type="time" value="12:00">
+            </div>
+
+            <div class="ln-setting-row">
+              <div>
+                <strong>同步分类</strong>
+                <span>手动和自动同步时发送哪些未看链接。</span>
+              </div>
+              <select class="ln-select compact-control" id="syncCategory">
+                <option value="all">全部</option>
+                <option value="work">工作</option>
+                <option value="study">学习</option>
+                <option value="fun">娱乐</option>
+              </select>
+            </div>
+          </section>
+
+          <section aria-labelledby="dashboardTitle">
+            <h2 id="dashboardTitle">默认打开状态</h2>
+            <div class="ln-setting-row">
+              <div>
+                <strong>默认视图</strong>
+                <span>打开 Dashboard 时优先展示的布局。</span>
+              </div>
+              <select class="ln-select compact-control" id="defaultView">
+                <option value="list">列表</option>
+                <option value="timeline">时间线</option>
+                <option value="week">本周</option>
+                <option value="board">分类</option>
+              </select>
+            </div>
+
+            <div class="ln-setting-row">
+              <div>
+                <strong>默认显示范围</strong>
+                <span>打开 Dashboard 时优先展示的内容状态。</span>
+              </div>
+              <select class="ln-select compact-control" id="defaultFilter">
+                <option value="pending">未看</option>
+                <option value="favorite">精品</option>
+                <option value="done">已看</option>
+                <option value="today">今日</option>
+                <option value="week">本周</option>
+                <option value="all">全部</option>
+                <option value="deleted">回收站</option>
+              </select>
+            </div>
+          </section>
+
+          <section aria-labelledby="alertTitle">
+            <h2 id="alertTitle">提醒</h2>
+            <div class="ln-setting-row">
+              <div>
+                <strong>今日未看阈值提醒</strong>
+                <span>超过阈值时提醒你整理收件箱。</span>
+              </div>
+              <label class="ln-toggle">
+                <input id="thresholdAlertEnabled" type="checkbox">
+                <span></span>
+              </label>
+            </div>
+
+            <div class="ln-setting-row">
+              <div>
+                <strong>阈值提醒数量</strong>
+                <span>达到该数量后触发整理提醒。</span>
+              </div>
+              <input class="ln-input compact-control" id="thresholdCount" type="number" min="1" step="1" value="15">
+            </div>
+          </section>
+
+          <div class="settings-actions">
+            <button class="ln-button ln-button-primary" type="submit">保存设置</button>
+            <button class="ln-button ln-button-primary" id="manualSync" type="button">手动同步</button>
+            <button class="ln-button ln-button-soft" id="testSend" type="button">测试发送到飞书</button>
+          </div>
+        </form>
+
+        <p class="status" id="status" role="status"></p>
+      </section>
+    </main>
+  </body>
+</html>

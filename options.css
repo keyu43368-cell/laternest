@@ -1,0 +1,177 @@
+body {
+  min-width: 960px;
+  min-height: 100vh;
+}
+
+.options-app {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  min-height: 100vh;
+  background: var(--ln-surface);
+}
+
+.settings-sidebar {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--ln-line);
+  padding: 22px 26px;
+}
+
+.window-dots {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 38px;
+}
+
+.window-dots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #d9d9d9;
+}
+
+.window-dots span:nth-child(1) {
+  background: #ff5f57;
+}
+
+.window-dots span:nth-child(2) {
+  background: #ffbd2e;
+}
+
+.window-dots span:nth-child(3) {
+  background: #28c840;
+}
+
+.settings-brand {
+  margin-bottom: 42px;
+}
+
+.settings-nav {
+  display: grid;
+  gap: 6px;
+}
+
+.settings-nav p {
+  color: var(--ln-muted);
+  font-size: 12px;
+  font-weight: 700;
+  margin: 20px 0 6px;
+}
+
+.settings-nav button {
+  display: flex;
+  align-items: center;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ln-ink);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  min-height: 38px;
+  padding: 0 12px;
+  text-align: left;
+}
+
+.settings-nav button:hover,
+.settings-nav button.active {
+  background: var(--ln-soft-selected);
+}
+
+.settings-content {
+  padding: 44px 56px 32px;
+}
+
+.settings-header {
+  margin-bottom: 34px;
+}
+
+.back-button {
+  margin-bottom: 18px;
+}
+
+.settings-header .eyebrow {
+  color: var(--ln-muted);
+  font-size: 13px;
+  font-weight: 800;
+  margin: 0 0 8px;
+}
+
+.settings-header h1 {
+  color: var(--ln-ink);
+  font-size: clamp(30px, 4vw, 46px);
+  letter-spacing: 0;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.settings-panel {
+  max-width: 920px;
+}
+
+.settings-panel section + section {
+  margin-top: 28px;
+}
+
+.settings-panel h2 {
+  border-bottom: 1px solid var(--ln-line);
+  color: var(--ln-muted);
+  font-size: 13px;
+  letter-spacing: 0;
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+.compact-control {
+  max-width: 220px;
+}
+
+.settings-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 28px;
+}
+
+.status {
+  color: var(--ln-muted);
+  min-height: 22px;
+  margin: 18px 0 0;
+}
+
+.status.error {
+  color: var(--ln-danger);
+}
+
+@media (max-width: 900px) {
+  body {
+    min-width: 0;
+  }
+
+  .options-app {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-sidebar {
+    border-bottom: 1px solid var(--ln-line);
+    border-right: 0;
+  }
+
+  .settings-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .settings-content {
+    padding: 30px 22px;
+  }
+
+  .settings-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .compact-control {
+    max-width: none;
+  }
+}

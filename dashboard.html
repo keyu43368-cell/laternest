@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>稍后细品 Dashboard</title>
+    <link rel="icon" href="icons/icon48.png" type="image/png">
+    <link rel="stylesheet" href="laternest-ui.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="shared.js" defer></script>
+    <script src="dashboard.js" defer></script>
+  </head>
+  <body>
+    <div class="ln-app-shell dashboard-container">
+      <aside class="ln-sidebar sidebar" aria-label="主导航">
+        <div class="ln-brand ln-brand-stack">
+          <span class="ln-brand-mark" aria-hidden="true">
+            <img src="assets/laternest-logo.png" alt="">
+          </span>
+          <span>LaterNest</span>
+        </div>
+
+        <nav class="ln-nav nav-menu">
+          <section class="ln-nav-section">
+            <button class="ln-nav-item sidebar-filter is-active" data-filter="pending" type="button">
+              <span>收件箱</span><span class="ln-nav-count" id="pendingCount">0</span>
+            </button>
+            <button class="ln-nav-item sidebar-filter" data-filter="favorite" type="button">
+              <span>精品</span><span class="ln-nav-count" id="favoriteCount">0</span>
+            </button>
+            <button class="ln-nav-item sidebar-filter" data-filter="all" type="button">
+              <span>全部内容</span><span class="ln-nav-count" id="totalCount">0</span>
+            </button>
+          </section>
+
+          <section class="ln-nav-section">
+            <button class="ln-nav-item sidebar-category" data-category="work" type="button">
+              <span>工作</span><span class="ln-nav-count" id="workCount">0</span>
+            </button>
+            <button class="ln-nav-item sidebar-category" data-category="study" type="button">
+              <span>学习</span><span class="ln-nav-count" id="studyCount">0</span>
+            </button>
+            <button class="ln-nav-item sidebar-category" data-category="fun" type="button">
+              <span>娱乐</span><span class="ln-nav-count" id="funCount">0</span>
+            </button>
+          </section>
+
+          <section class="ln-nav-section">
+            <button class="ln-nav-item sidebar-filter" data-filter="done" type="button">
+              <span>已完成</span><span class="ln-nav-count" id="doneCount">0</span>
+            </button>
+            <button class="ln-nav-item sidebar-filter" data-filter="deleted" type="button">
+              <span>回收站</span><span class="ln-nav-count" id="deletedCount">0</span>
+            </button>
+          </section>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button class="sidebar-settings-button" id="openOptions" type="button" aria-label="进入设置">
+            <span>设置</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="ln-main content-area">
+        <header class="ln-main-header content-header">
+          <h1 class="ln-page-title page-title" id="pageTitle">收件箱</h1>
+          <label class="ln-search search-bar" aria-label="搜索">
+            <span aria-hidden="true">⌕</span>
+            <input id="searchInput" type="search" placeholder="搜索你保存的内容...">
+            <span class="ln-search-kbd">⌘K</span>
+          </label>
+        </header>
+
+        <section class="content-meta" aria-label="统计">
+          <article class="stat-flip-card" data-type="done">
+            <span>已完成</span>
+            <strong class="flip-number" id="completedTotal" data-value="0" aria-live="polite">
+              <span class="flip-number-current">0</span>
+              <span class="flip-number-next">0</span>
+            </strong>
+          </article>
+          <article class="stat-flip-card" data-type="pending">
+            <span>未看</span>
+            <strong class="flip-number" id="allPending" data-value="0" aria-live="polite">
+              <span class="flip-number-current">0</span>
+              <span class="flip-number-next">0</span>
+            </strong>
+          </article>
+        </section>
+
+        <section class="filter-zone toolbar" aria-label="筛选与视图">
+          <select id="categoryFilter" class="visually-hidden" aria-label="类别筛选">
+            <option value="all">全部类别</option>
+            <option value="work">工作</option>
+            <option value="study">学习</option>
+            <option value="fun">娱乐</option>
+          </select>
+
+          <div class="status-tabs" aria-label="内容类型">
+            <button class="status-tab tab active" data-filter="all" type="button">全部</button>
+            <button class="status-tab tab" data-filter="pending" type="button">未看</button>
+            <button class="status-tab tab" data-filter="done" type="button">已看</button>
+          </div>
+
+          <div class="toolbar-container">
+            <div class="view-switcher" aria-label="视图">
+              <button class="view-btn view-button active" data-view="timeline" type="button">时间线</button>
+              <button class="view-btn view-button" data-view="week" type="button">周视图</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="ln-list-toolbar bulkbar collapsed" id="bulkbar" aria-live="polite">
+          <label class="select-all">
+            <input id="selectAll" type="checkbox">
+            <span>选择当前结果</span>
+          </label>
+          <button class="ln-button ln-button-text" id="toggleBulkbar" type="button">批量操作</button>
+          <div class="ln-list-tools bulk-panel" id="bulkPanel">
+            <button class="ln-button ln-button-ghost" data-bulk-cancel type="button">取消</button>
+            <button class="ln-button ln-button-ghost" data-bulk="done" type="button">完成</button>
+            <button class="ln-button ln-button-ghost" data-bulk="tomorrow" type="button">明天</button>
+            <button class="ln-button ln-button-ghost" data-bulk="week" type="button">本周</button>
+            <button class="ln-button ln-button-ghost danger" data-bulk="delete" type="button">删除</button>
+          </div>
+        </section>
+
+        <p class="ln-status status" id="status" role="status"></p>
+
+        <section class="ln-list content-list" aria-label="内容列表">
+          <div class="todo-list" id="todoList"></div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LaterNest | 稍后细品</title>
+    <style>
+      :root {
+        --bg: #f8f9fa;
+        --surface: #ffffff;
+        --ink: #171717;
+        --muted: #6f7177;
+        --gold: #c2a878;
+        --line: rgba(0, 0, 0, 0.07);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+        letter-spacing: 0;
+      }
+
+      main {
+        width: min(1040px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 64px 0 72px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 300px;
+        gap: 56px;
+        align-items: center;
+        min-height: 74vh;
+      }
+
+      .logo {
+        width: 220px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(44px, 7vw, 86px);
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 680px;
+        margin: 28px 0 0;
+        color: var(--muted);
+        font-size: 20px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 34px;
+      }
+
+      a.button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        border-radius: 999px;
+        padding: 0 20px;
+        background: var(--ink);
+        color: #fff;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      a.button.secondary {
+        border: 1px solid var(--line);
+        background: var(--surface);
+        color: var(--ink);
+      }
+
+      .section {
+        border-top: 1px solid var(--line);
+        padding: 44px 0;
+      }
+
+      h2 {
+        margin: 0 0 18px;
+        font-size: 26px;
+        line-height: 1.2;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .feature {
+        min-height: 160px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--surface);
+        padding: 22px;
+      }
+
+      .feature strong {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 17px;
+      }
+
+      .feature p,
+      .section p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .privacy {
+        display: grid;
+        grid-template-columns: 9px minmax(0, 1fr);
+        gap: 16px;
+      }
+
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--gold);
+        margin-top: 9px;
+      }
+
+      code {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 2px 6px;
+      }
+
+      @media (max-width: 760px) {
+        main {
+          width: min(100% - 28px, 1040px);
+          padding-top: 36px;
+        }
+
+        .hero,
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          min-height: auto;
+          gap: 30px;
+        }
+
+        .logo {
+          width: 150px;
+          margin: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <div>
+          <h1>稍后细品<br>LaterNest</h1>
+          <p class="lead">一个本地优先的 Chrome 稍后阅读工作台。把当前网页保存成待处理内容，再用时间线、周视图和批量整理把它们带回眼前。</p>
+          <div class="actions">
+            <a class="button" href="#install">Install from source</a>
+            <a class="button secondary" href="product-introduction.md">Read the story</a>
+          </div>
+        </div>
+        <img class="logo" src="assets/laternest-logo.png" alt="LaterNest logo">
+      </section>
+
+      <section class="section" id="install">
+        <h2>为什么做它</h2>
+        <p>收藏不是终点。真正困难的是在合适的时候重新看见、整理并完成。LaterNest 让稍后阅读更像一个安静的收件箱，而不是另一个被遗忘的列表。</p>
+      </section>
+
+      <section class="section">
+        <h2>核心功能</h2>
+        <div class="grid">
+          <article class="feature">
+            <strong>快速保存</strong>
+            <p>从当前标签页保存标题、URL、来源域名、备注、分类和待看时间。</p>
+          </article>
+          <article class="feature">
+            <strong>整理工作台</strong>
+            <p>在 Dashboard 中搜索、筛选、完成、延后、删除和批量整理保存内容。</p>
+          </article>
+          <article class="feature">
+            <strong>时间线与周视图</strong>
+            <p>按日期回看，也可以把一周积累的内容集中梳理出来。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section privacy">
+        <span class="dot" aria-hidden="true"></span>
+        <div>
+          <h2>本地优先，不默认上传</h2>
+          <p>LaterNest 没有账号系统，也没有远程数据库。你的保存内容默认留在自己的 Chrome 本地存储里。只有当你主动配置 Feishu/Lark Webhook 时，才会把未看清单发送到你自己的机器人。</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>安装</h2>
+        <p>下载仓库后打开 <code>chrome://extensions/</code>，开启开发者模式，选择“加载已解压的扩展程序”，然后选中 LaterNest 文件夹。</p>
+      </section>
+    </main>
+  </body>
+</html>
