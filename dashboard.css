@@ -661,11 +661,12 @@ body {
 
 .week-view .week-link-card {
   box-sizing: border-box;
+  position: relative;
   height: 54px;
   border: 0;
   border-bottom: 1px solid var(--ln-line);
   border-radius: 0;
-  overflow: hidden;
+  overflow: visible;
   padding: 10px 0;
 }
 
@@ -681,6 +682,34 @@ body {
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.week-view .week-link-note {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  top: calc(100% - 4px);
+  margin: 0;
+  border: 1px solid var(--ln-line);
+  border-radius: 10px;
+  background: rgba(253, 253, 253, 0.96);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
+  color: var(--ln-muted);
+  font-size: 12px;
+  line-height: 1.45;
+  opacity: 0;
+  padding: 10px 12px;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 140ms ease, transform 140ms ease;
+  backdrop-filter: blur(14px);
+}
+
+.week-view .week-link-card:hover .week-link-note,
+.week-view .week-link-card:focus-within .week-link-note {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .week-view .column-empty {

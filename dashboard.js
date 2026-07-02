@@ -248,12 +248,16 @@ function createWeekLinkCard(todo) {
     <div class="tag-content">
       <a class="tag-title week-link-title" target="_blank" rel="noreferrer"></a>
     </div>
+    <p class="week-link-note" hidden></p>
     ${isDone ? '<button class="restore-action" data-action="restore" type="button">恢复</button>' : ""}
   `;
   card.querySelector(".select-todo").checked = isSelected;
   const link = card.querySelector(".week-link-title");
   link.href = todo.url;
   link.textContent = todo.title;
+  const note = card.querySelector(".week-link-note");
+  note.textContent = todo.note;
+  note.hidden = !todo.note;
   return card;
 }
 

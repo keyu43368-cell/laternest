@@ -136,7 +136,7 @@ quickSaveButton.addEventListener("click", async (event) => {
   await saveCurrentPage();
 });
 openDashboardButton.addEventListener("click", () => LaterList.openDashboard());
-openOptionsButton.addEventListener("click", () => LaterList.openOptions());
+openOptionsButton?.addEventListener("click", () => LaterList.openOptions());
 openOptionsFooterButton?.addEventListener("click", () => LaterList.openOptions());
 
 initCurrentTab();
