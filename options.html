@@ -22,17 +22,14 @@
           </span>
           <strong>稍后细品</strong>
         </div>
-        <nav class="settings-nav">
-          <p>通用</p>
-          <button class="active" type="button">飞书同步设置</button>
-          <button type="button">外观</button>
-          <button type="button">快捷键</button>
-          <p>集成</p>
-          <button type="button">Webhook</button>
-          <button type="button">浏览器</button>
-          <p>关于</p>
-          <button type="button">帮助与反馈</button>
-        </nav>
+        <div class="settings-help">
+          <button class="settings-help-button" id="showFeedback" type="button" aria-expanded="false" aria-controls="feedbackEmail">
+            帮助与反馈
+          </button>
+          <p class="settings-feedback" id="feedbackEmail" hidden>
+            请联系：<a href="mailto:jojozhang1214@163.com">jojozhang1214@163.com</a>
+          </p>
+        </div>
       </aside>
 
       <section class="settings-content">

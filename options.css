@@ -46,36 +46,47 @@ body {
   margin-bottom: 42px;
 }
 
-.settings-nav {
+.settings-help {
   display: grid;
-  gap: 6px;
+  gap: 12px;
+  margin-top: auto;
 }
 
-.settings-nav p {
-  color: var(--ln-muted);
-  font-size: 12px;
-  font-weight: 700;
-  margin: 20px 0 6px;
-}
-
-.settings-nav button {
+.settings-help-button {
   display: flex;
   align-items: center;
-  border: 0;
-  border-radius: 10px;
-  background: transparent;
+  justify-content: center;
+  border: 1px solid var(--ln-line);
+  border-radius: 14px;
+  background: var(--ln-surface);
   color: var(--ln-ink);
   cursor: pointer;
   font: inherit;
   font-weight: 700;
-  min-height: 38px;
-  padding: 0 12px;
-  text-align: left;
+  min-height: 44px;
+  padding: 0 16px;
 }
 
-.settings-nav button:hover,
-.settings-nav button.active {
+.settings-help-button:hover {
   background: var(--ln-soft-selected);
+}
+
+.settings-feedback {
+  color: var(--ln-muted);
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+  word-break: break-all;
+}
+
+.settings-feedback a {
+  color: var(--ln-ink);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.settings-feedback a:hover {
+  text-decoration: underline;
 }
 
 .settings-content {
@@ -158,8 +169,8 @@ body {
     border-right: 0;
   }
 
-  .settings-nav {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .settings-help {
+    margin-top: 22px;
   }
 
   .settings-content {

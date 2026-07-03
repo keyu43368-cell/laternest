@@ -11,6 +11,8 @@ const testSend = document.querySelector("#testSend");
 const manualSync = document.querySelector("#manualSync");
 const backHome = document.querySelector("#backHome");
 const statusText = document.querySelector("#status");
+const showFeedback = document.querySelector("#showFeedback");
+const feedbackEmail = document.querySelector("#feedbackEmail");
 
 function setStatus(message, isError = false) {
   statusText.textContent = message;
@@ -92,6 +94,11 @@ manualSync.addEventListener("click", async () => {
 
 backHome.addEventListener("click", () => {
   window.location.href = "dashboard.html";
+});
+
+showFeedback.addEventListener("click", () => {
+  feedbackEmail.hidden = false;
+  showFeedback.setAttribute("aria-expanded", "true");
 });
 
 loadSettings();
