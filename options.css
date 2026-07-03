@@ -1,20 +1,21 @@
 body {
-  min-width: 960px;
+  min-width: 360px;
   min-height: 100vh;
 }
 
 .options-app {
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
+  grid-template-columns: var(--ln-sidebar) minmax(0, 1fr);
   min-height: 100vh;
-  background: var(--ln-surface);
+  background: var(--ln-bg);
 }
 
 .settings-sidebar {
   display: flex;
   flex-direction: column;
   border-right: 1px solid var(--ln-line);
-  padding: 22px 26px;
+  background: color-mix(in srgb, var(--ln-surface) 82%, var(--ln-bg) 18%);
+  padding: 36px 14px 24px;
 }
 
 .window-dots {
@@ -90,11 +91,11 @@ body {
 }
 
 .settings-content {
-  padding: 44px 56px 32px;
+  padding: 32px 42px 40px 50px;
 }
 
 .settings-header {
-  margin-bottom: 34px;
+  margin-bottom: 30px;
 }
 
 .back-button {
@@ -110,9 +111,10 @@ body {
 
 .settings-header h1 {
   color: var(--ln-ink);
-  font-size: clamp(30px, 4vw, 46px);
+  font-size: 30px;
+  font-weight: 850;
   letter-spacing: 0;
-  line-height: 1.15;
+  line-height: 1.25;
   margin: 0;
 }
 
@@ -155,7 +157,7 @@ body {
   color: var(--ln-danger);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 760px) {
   body {
     min-width: 0;
   }
@@ -174,7 +176,7 @@ body {
   }
 
   .settings-content {
-    padding: 30px 22px;
+    padding: 24px 18px;
   }
 
   .settings-actions {
