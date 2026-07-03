@@ -414,10 +414,10 @@ body {
 .timeline-section {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 12px;
-  padding: 0 0 30px;
+  gap: 8px;
+  padding: 0 0 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .timeline-section::before {
@@ -471,12 +471,13 @@ body {
 }
 
 .date-timeline-view .timeline-stack {
-  gap: 20px;
+  gap: 10px;
 }
 
 .date-timeline-view .todo-card {
   position: relative;
   grid-template-columns: minmax(280px, 1.8fr) minmax(96px, 0.55fr) minmax(170px, 0.72fr) minmax(110px, 0.42fr) 54px;
+  min-height: 72px;
   border-bottom: 0;
 }
 
