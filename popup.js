@@ -4,7 +4,6 @@ const pageCard = document.querySelector("#pageCard");
 const savedBadge = document.querySelector("#savedBadge");
 const noteInput = document.querySelector("#noteInput");
 const categoryInput = document.querySelector("#categoryInput");
-const reminderPreset = document.querySelector("#reminderPreset");
 const saveForm = document.querySelector("#saveForm");
 const statusText = document.querySelector("#status");
 const recentList = document.querySelector("#recentList");
@@ -106,7 +105,7 @@ async function saveCurrentPage() {
 
   try {
     if (!currentTab) currentTab = await LaterList.getCurrentTab();
-    const remindAt = LaterList.presetReminderToIso(reminderPreset.value);
+    const remindAt = LaterList.presetReminderToIso("today");
     const todo = LaterList.createTodoFromCurrentTab(currentTab, noteInput.value, remindAt, categoryInput.value);
     const todos = await LaterList.getTodos();
     await LaterList.setTodos([todo, ...todos]);
@@ -115,7 +114,6 @@ async function saveCurrentPage() {
 
     noteInput.value = "";
     categoryInput.value = "study";
-    reminderPreset.value = "today";
     setStatus("已保存到稍后细品");
     await refreshRecent();
   } catch (error) {
