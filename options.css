@@ -11,8 +11,13 @@ body {
 }
 
 .settings-sidebar {
+  position: sticky;
+  top: 0;
+  align-self: start;
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
   border-right: 1px solid var(--ln-line);
   background: color-mix(in srgb, var(--ln-surface) 82%, var(--ln-bg) 18%);
   padding: 36px 14px 24px;
@@ -26,6 +31,7 @@ body {
   display: grid;
   gap: 12px;
   margin-top: auto;
+  margin-bottom: 18px;
 }
 
 .settings-help-button {
@@ -143,12 +149,16 @@ body {
   }
 
   .settings-sidebar {
+    position: static;
+    height: auto;
+    overflow: visible;
     border-bottom: 1px solid var(--ln-line);
     border-right: 0;
   }
 
   .settings-help {
     margin-top: 22px;
+    margin-bottom: 0;
   }
 
   .settings-content {
