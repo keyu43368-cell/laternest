@@ -8,6 +8,8 @@ const allPending = document.querySelector("#allPending");
 const openOptions = document.querySelector("#openOptions");
 const bulkbar = document.querySelector("#bulkbar");
 const toggleBulkbar = document.querySelector("#toggleBulkbar");
+const bulkDoneButton = document.querySelector("[data-bulk='done']");
+const bulkRestoreButton = document.querySelector("[data-bulk='restore']");
 const categoryButtons = document.querySelectorAll(".category-button");
 const categoryFilterSection = document.querySelector(".category-filter");
 const sidebarFilters = document.querySelectorAll(".sidebar-filter");
@@ -58,9 +60,12 @@ function setStatus(message, isError = false) {
 
 function updateBulkbarState() {
   const hasSelection = selectedIds.size > 0;
+  const isDeletedView = activeFilter === "deleted";
   bulkbar.classList.toggle("is-visible", hasSelection);
   bulkbar.classList.toggle("collapsed", !hasSelection);
   toggleBulkbar.textContent = hasSelection ? `已选 ${selectedIds.size} 项` : "批量操作";
+  bulkDoneButton.hidden = isDeletedView;
+  bulkRestoreButton.hidden = !isDeletedView;
 }
 
 function applyActiveControls() {
@@ -459,10 +464,14 @@ async function toggleTodo(todoId) {
   await saveAndRender(nextTodos);
 }
 
-async function deleteTodos(ids) {
+async function deleteTodos(ids, permanently = false) {
   for (const id of ids) await LaterList.clearReminderAlarm(id);
   const idSet = new Set(ids);
   selectedIds = new Set([...selectedIds].filter((id) => !idSet.has(id)));
+  if (permanently) {
+    await saveAndRender(todos.filter((todo) => !idSet.has(todo.id)));
+    return;
+  }
   await saveAndRender(todos.map((todo) => idSet.has(todo.id)
     ? {
       ...todo,
@@ -472,6 +481,13 @@ async function deleteTodos(ids) {
       remind_at: null,
       postponed_to: null
     }
+    : todo));
+}
+
+async function restoreTodos(ids) {
+  const idSet = new Set(ids);
+  await saveAndRender(todos.map((todo) => idSet.has(todo.id)
+    ? { ...todo, status: "pending", completed_at: null, deleted_at: null }
     : todo));
 }
 
@@ -630,11 +646,18 @@ document.querySelectorAll("[data-bulk]").forEach((button) => {
       return;
     }
     const action = button.dataset.bulk;
-    if (action === "delete" && !window.confirm(`确认删除选中的 ${ids.length} 条链接吗？`)) return;
+    const isDeletedView = activeFilter === "deleted";
+    if (action === "delete") {
+      const message = isDeletedView
+        ? `确认永久删除选中的 ${ids.length} 条链接吗？`
+        : `确认删除选中的 ${ids.length} 条链接吗？`;
+      if (!window.confirm(message)) return;
+    }
     if (action === "done") await bulkComplete(ids);
+    if (action === "restore") await restoreTodos(ids);
     if (action === "tomorrow") await postponeTodos(ids, "tomorrow");
     if (action === "week") await postponeTodos(ids, "week");
-    if (action === "delete") await deleteTodos(ids);
+    if (action === "delete") await deleteTodos(ids, isDeletedView);
     selectedIds.clear();
     render();
     setStatus("批量操作已完成。");
