@@ -18,33 +18,8 @@ body {
   padding: 36px 14px 24px;
 }
 
-.window-dots {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 38px;
-}
-
-.window-dots span {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #d9d9d9;
-}
-
-.window-dots span:nth-child(1) {
-  background: #ff5f57;
-}
-
-.window-dots span:nth-child(2) {
-  background: #ffbd2e;
-}
-
-.window-dots span:nth-child(3) {
-  background: #28c840;
-}
-
 .settings-brand {
-  margin-bottom: 42px;
+  margin-bottom: 0;
 }
 
 .settings-help {
@@ -95,18 +70,15 @@ body {
 }
 
 .settings-header {
-  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 16px;
+  margin-bottom: 22px;
 }
 
 .back-button {
-  margin-bottom: 18px;
-}
-
-.settings-header .eyebrow {
-  color: var(--ln-muted);
-  font-size: 13px;
-  font-weight: 800;
-  margin: 0 0 8px;
+  justify-self: end;
 }
 
 .settings-header h1 {
@@ -123,7 +95,7 @@ body {
 }
 
 .settings-panel section + section {
-  margin-top: 28px;
+  margin-top: 18px;
 }
 
 .settings-panel h2 {
@@ -132,7 +104,11 @@ body {
   font-size: 13px;
   letter-spacing: 0;
   margin: 0;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
+}
+
+.settings-panel .ln-setting-row {
+  min-height: 58px;
 }
 
 .compact-control {
@@ -144,7 +120,7 @@ body {
   align-items: center;
   gap: 12px;
   justify-content: flex-end;
-  margin-top: 28px;
+  margin-top: 20px;
 }
 
 .status {
