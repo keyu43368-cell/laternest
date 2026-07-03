@@ -19,6 +19,10 @@
           </span>
           <strong>稍后细品</strong>
         </div>
+        <nav class="settings-nav" aria-label="设置页面">
+          <button class="settings-nav-item is-active" data-settings-page="sync" type="button">飞书同步</button>
+          <button class="settings-nav-item" data-settings-page="cleanup" type="button">数据整理</button>
+        </nav>
         <div class="settings-help">
           <button class="settings-help-button" id="showFeedback" type="button" aria-expanded="false" aria-controls="feedbackEmail">
             帮助与反馈
@@ -31,11 +35,11 @@
 
       <section class="settings-content">
         <header class="settings-header">
-          <h1>飞书同步设置</h1>
+          <h1 id="settingsTitle">飞书同步设置</h1>
           <button class="ln-button ln-button-soft back-button" id="backHome" type="button">返回主页</button>
         </header>
 
-        <form id="settingsForm" class="settings-panel">
+        <form id="settingsForm" class="settings-panel settings-page is-active" data-settings-panel="sync">
           <section aria-labelledby="baseTitle">
             <h2 id="baseTitle">基础</h2>
             <div class="ln-setting-row">
@@ -133,6 +137,14 @@
             </div>
           </section>
 
+          <div class="settings-actions">
+            <button class="ln-button ln-button-primary" type="submit">保存设置</button>
+            <button class="ln-button ln-button-primary" id="manualSync" type="button">手动同步</button>
+            <button class="ln-button ln-button-soft" id="testSend" type="button">测试发送到飞书</button>
+          </div>
+        </form>
+
+        <section class="settings-panel settings-page" data-settings-panel="cleanup" hidden>
           <section aria-labelledby="cleanupTitle">
             <h2 id="cleanupTitle">数据整理</h2>
             <div class="ln-setting-row">
@@ -143,13 +155,7 @@
               <button class="ln-button ln-button-ghost danger-action" id="clearDoneTodos" type="button">一键清空</button>
             </div>
           </section>
-
-          <div class="settings-actions">
-            <button class="ln-button ln-button-primary" type="submit">保存设置</button>
-            <button class="ln-button ln-button-primary" id="manualSync" type="button">手动同步</button>
-            <button class="ln-button ln-button-soft" id="testSend" type="button">测试发送到飞书</button>
-          </div>
-        </form>
+        </section>
 
         <p class="status" id="status" role="status"></p>
       </section>

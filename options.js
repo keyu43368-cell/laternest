@@ -14,10 +14,29 @@ const statusText = document.querySelector("#status");
 const showFeedback = document.querySelector("#showFeedback");
 const feedbackEmail = document.querySelector("#feedbackEmail");
 const clearDoneTodos = document.querySelector("#clearDoneTodos");
+const settingsTitle = document.querySelector("#settingsTitle");
+const settingsNavItems = document.querySelectorAll("[data-settings-page]");
+const settingsPanels = document.querySelectorAll("[data-settings-panel]");
+
+const pageTitles = {
+  sync: "飞书同步设置",
+  cleanup: "数据整理"
+};
 
 function setStatus(message, isError = false) {
   statusText.textContent = message;
   statusText.classList.toggle("error", isError);
+}
+
+function showSettingsPage(page) {
+  settingsNavItems.forEach((item) => {
+    item.classList.toggle("is-active", item.dataset.settingsPage === page);
+  });
+  settingsPanels.forEach((panel) => {
+    panel.hidden = panel.dataset.settingsPanel !== page;
+  });
+  settingsTitle.textContent = pageTitles[page] || pageTitles.sync;
+  setStatus("");
 }
 
 function readFormSettings() {
@@ -118,6 +137,10 @@ backHome.addEventListener("click", () => {
 showFeedback.addEventListener("click", () => {
   feedbackEmail.hidden = false;
   showFeedback.setAttribute("aria-expanded", "true");
+});
+
+settingsNavItems.forEach((item) => {
+  item.addEventListener("click", () => showSettingsPage(item.dataset.settingsPage));
 });
 
 loadSettings();

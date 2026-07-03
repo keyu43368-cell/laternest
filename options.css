@@ -27,6 +27,36 @@ body {
   margin-bottom: 0;
 }
 
+.settings-nav {
+  display: grid;
+  gap: 6px;
+  margin-top: 46px;
+}
+
+.settings-nav-item {
+  display: flex;
+  align-items: center;
+  min-height: 42px;
+  border-radius: var(--ln-radius-md);
+  background: transparent;
+  color: var(--ln-ink);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  padding: 0 12px;
+  text-align: left;
+  transition: background 160ms var(--ln-ease), transform 160ms var(--ln-ease);
+}
+
+.settings-nav-item:hover,
+.settings-nav-item.is-active {
+  background: var(--ln-selected);
+}
+
+.settings-nav-item:active {
+  transform: scale(0.99);
+}
+
 .settings-help {
   display: grid;
   gap: 12px;
@@ -100,6 +130,10 @@ body {
   max-width: 920px;
 }
 
+.settings-page[hidden] {
+  display: none;
+}
+
 .settings-panel section + section {
   margin-top: 18px;
 }
@@ -164,6 +198,10 @@ body {
   .settings-help {
     margin-top: 22px;
     margin-bottom: 0;
+  }
+
+  .settings-nav {
+    margin-top: 22px;
   }
 
   .settings-content {
