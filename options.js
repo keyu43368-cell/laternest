@@ -13,6 +13,7 @@ const backHome = document.querySelector("#backHome");
 const statusText = document.querySelector("#status");
 const showFeedback = document.querySelector("#showFeedback");
 const feedbackEmail = document.querySelector("#feedbackEmail");
+const clearDoneTodos = document.querySelector("#clearDoneTodos");
 
 function setStatus(message, isError = false) {
   statusText.textContent = message;
@@ -87,6 +88,24 @@ manualSync.addEventListener("click", async () => {
     const result = await LaterList.syncPendingToFeishu(syncCategory.value);
     const categoryText = result.category === "all" ? "全部" : LaterList.getCategoryLabel(result.category);
     setStatus(result.sent ? `手动同步完成，已发送 ${categoryText}未看 ${result.count} 条。` : `${categoryText}分类下没有需要同步的未看链接。`);
+  } catch (error) {
+    setStatus(error.message, true);
+  }
+});
+
+clearDoneTodos.addEventListener("click", async () => {
+  try {
+    const todos = await LaterList.getTodos();
+    const doneTodos = todos.filter((todo) => todo.status === "done");
+    if (doneTodos.length === 0) {
+      setStatus("没有已看完内容需要清空。");
+      return;
+    }
+    if (!window.confirm(`确认永久删除 ${doneTodos.length} 条已看完内容吗？`)) return;
+    const doneIds = new Set(doneTodos.map((todo) => todo.id));
+    await Promise.all(doneTodos.map((todo) => LaterList.clearReminderAlarm(todo.id)));
+    await LaterList.setTodos(todos.filter((todo) => !doneIds.has(todo.id)));
+    setStatus(`已清空 ${doneTodos.length} 条已看完内容。`);
   } catch (error) {
     setStatus(error.message, true);
   }

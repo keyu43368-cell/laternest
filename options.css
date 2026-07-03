@@ -121,6 +121,11 @@ body {
   max-width: 220px;
 }
 
+.danger-action {
+  color: var(--ln-danger);
+  justify-self: end;
+}
+
 .settings-actions {
   display: flex;
   align-items: center;
