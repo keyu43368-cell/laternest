@@ -345,11 +345,16 @@ body {
   gap: 8px;
 }
 
-.favorite-action {
-  justify-content: center;
+.category-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-start;
+  min-width: 0;
 }
 
-.favorite-action .ln-star-button {
+.category-action .ln-star-button {
+  flex: 0 0 auto;
   margin-left: 0;
 }
 
@@ -488,7 +493,7 @@ body {
 
 .date-timeline-view .todo-card {
   position: relative;
-  grid-template-columns: minmax(280px, 1.8fr) minmax(96px, 0.55fr) 54px minmax(170px, 0.72fr) minmax(110px, 0.42fr) 54px;
+  grid-template-columns: minmax(360px, 2.2fr) minmax(112px, 0.34fr) minmax(170px, 0.62fr) minmax(110px, 0.34fr) 54px;
   min-height: 72px;
   border-bottom: 0;
 }

@@ -421,8 +421,8 @@ function createTodoCard(todo) {
           <span class="ln-subtitle"></span>
         </div>
       </div>
-      <span class="ln-pill category-hash category-${todo.category}"></span>
-      <span class="row-actions favorite-action">
+      <span class="category-action">
+        <span class="ln-pill category-hash category-${todo.category}"></span>
         <button class="ln-star-button star-btn${todo.favorite ? " is-active" : ""}" data-action="favorite" type="button" aria-label="加入精品" aria-pressed="${todo.favorite ? "true" : "false"}">${todo.favorite ? "★" : "☆"}</button>
       </span>
       <span class="ln-source"><span class="ln-domain">${todo.domain || "unknown"}</span></span>
