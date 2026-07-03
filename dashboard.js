@@ -415,10 +415,6 @@ function createTodoCard(todo) {
   card.dataset.id = todo.id;
   card.dataset.done = String(isDone);
   card.innerHTML = `
-      <label class="ln-checkbox tag-check-control">
-        <input class="select-todo" type="checkbox" aria-label="选择">
-        <span class="tag-check" aria-hidden="true">✓</span>
-      </label>
       <div class="ln-title-cell tag-content todo-main">
         <div class="ln-title-text">
           <a class="ln-title tag-title todo-title" target="_blank" rel="noreferrer"></a>
@@ -426,11 +422,17 @@ function createTodoCard(todo) {
         </div>
       </div>
       <span class="ln-pill category-hash category-${todo.category}"></span>
+      <span class="row-actions favorite-action">
+        <button class="ln-star-button star-btn${todo.favorite ? " is-active" : ""}" data-action="favorite" type="button" aria-label="加入精品" aria-pressed="${todo.favorite ? "true" : "false"}">${todo.favorite ? "★" : "☆"}</button>
+      </span>
       <span class="ln-source"><span class="ln-domain">${todo.domain || "unknown"}</span></span>
       <span class="ln-time">${formatRelativeTime(todo.created_at)}</span>
-      <span class="row-actions">
+      <span class="row-actions row-select">
         ${showDoneState ? '<button class="restore-action" data-action="restore" type="button">恢复</button>' : ""}
-        <button class="ln-star-button star-btn${todo.favorite ? " is-active" : ""}" data-action="favorite" type="button" aria-label="加入精品" aria-pressed="${todo.favorite ? "true" : "false"}">${todo.favorite ? "★" : "☆"}</button>
+        <label class="ln-checkbox tag-check-control">
+          <input class="select-todo" type="checkbox" aria-label="选择">
+          <span class="tag-check" aria-hidden="true">✓</span>
+        </label>
       </span>
     `;
 
