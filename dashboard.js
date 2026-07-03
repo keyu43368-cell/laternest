@@ -233,11 +233,16 @@ function formatRelativeTime(isoString) {
   return `${days} 天前`;
 }
 
+function isFavoriteView() {
+  return activeFilter === "favorite";
+}
+
 function createWeekLinkCard(todo) {
   const isDone = todo.status === "done";
+  const showDoneState = isDone && !isFavoriteView();
   const isSelected = selectedIds.has(todo.id);
   const card = document.createElement("article");
-  card.className = `tag-card week-link-card ${todo.status}${isDone ? " is-done" : ""}${isSelected ? " is-selected" : ""}`;
+  card.className = `tag-card week-link-card${showDoneState ? ` ${todo.status} is-done` : ""}${isSelected ? " is-selected" : ""}`;
   card.dataset.id = todo.id;
   card.dataset.done = String(isDone);
   card.innerHTML = `
@@ -249,7 +254,7 @@ function createWeekLinkCard(todo) {
       <a class="tag-title week-link-title" target="_blank" rel="noreferrer"></a>
     </div>
     <p class="week-link-note" hidden></p>
-    ${isDone ? '<button class="restore-action" data-action="restore" type="button">恢复</button>' : ""}
+    ${showDoneState ? '<button class="restore-action" data-action="restore" type="button">恢复</button>' : ""}
   `;
   card.querySelector(".select-todo").checked = isSelected;
   const link = card.querySelector(".week-link-title");
@@ -389,6 +394,7 @@ function renderBoard(visible) {
 
 function createTodoCard(todo) {
   const isDone = todo.status === "done";
+  const showDoneState = isDone && !isFavoriteView();
   const isSelected = selectedIds.has(todo.id);
   const statusLabel = {
     pending: "未看",
@@ -396,7 +402,7 @@ function createTodoCard(todo) {
     deleted: "已删"
   }[todo.status] || "未看";
   const card = document.createElement("article");
-  card.className = `ln-list-row tag-card todo-card ${todo.status}${isDone ? " is-done" : ""}${isSelected ? " is-selected" : ""}`;
+  card.className = `ln-list-row tag-card todo-card${showDoneState ? ` ${todo.status} is-done` : ""}${isSelected ? " is-selected" : ""}`;
   card.dataset.id = todo.id;
   card.dataset.done = String(isDone);
   card.innerHTML = `
@@ -414,7 +420,7 @@ function createTodoCard(todo) {
       <span class="ln-source"><span class="ln-domain">${todo.domain || "unknown"}</span></span>
       <span class="ln-time">${formatRelativeTime(todo.created_at)}</span>
       <span class="row-actions">
-        ${isDone ? '<button class="restore-action" data-action="restore" type="button">恢复</button>' : ""}
+        ${showDoneState ? '<button class="restore-action" data-action="restore" type="button">恢复</button>' : ""}
         <button class="ln-star-button star-btn${todo.favorite ? " is-active" : ""}" data-action="favorite" type="button" aria-label="加入精品" aria-pressed="${todo.favorite ? "true" : "false"}">${todo.favorite ? "★" : "☆"}</button>
       </span>
     `;
