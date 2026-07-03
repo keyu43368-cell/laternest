@@ -58,9 +58,13 @@ function setStatus(message, isError = false) {
   statusText.classList.toggle("error", isError);
 }
 
+function isTrashView() {
+  return activeFilter === "deleted" && categoryFilter.value === "all";
+}
+
 function updateBulkbarState() {
   const hasSelection = selectedIds.size > 0;
-  const isDeletedView = activeFilter === "deleted";
+  const isDeletedView = isTrashView();
   bulkbar.classList.toggle("is-visible", hasSelection);
   bulkbar.classList.toggle("collapsed", !hasSelection);
   toggleBulkbar.textContent = hasSelection ? `已选 ${selectedIds.size} 项` : "批量操作";
@@ -104,9 +108,9 @@ function filteredTodos() {
   const keyword = searchInput.value.trim().toLowerCase();
   return todos.filter((todo) => {
     const matchesFilter =
-      activeFilter === "all" ||
-      (activeFilter === "today" && LaterList.isToday(todo.created_at)) ||
-      (activeFilter === "week" && isThisWeek(todo.created_at)) ||
+      (activeFilter === "all" && todo.status !== "deleted") ||
+      (activeFilter === "today" && todo.status !== "deleted" && LaterList.isToday(todo.created_at)) ||
+      (activeFilter === "week" && todo.status !== "deleted" && isThisWeek(todo.created_at)) ||
       (activeFilter === "pending" && todo.status === "pending") ||
       (activeFilter === "done" && todo.status === "done") ||
       (activeFilter === "deleted" && todo.status === "deleted") ||
@@ -646,7 +650,7 @@ document.querySelectorAll("[data-bulk]").forEach((button) => {
       return;
     }
     const action = button.dataset.bulk;
-    const isDeletedView = activeFilter === "deleted";
+    const isDeletedView = isTrashView();
     if (action === "delete") {
       const message = isDeletedView
         ? `确认永久删除选中的 ${ids.length} 条链接吗？`
