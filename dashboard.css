@@ -484,16 +484,15 @@ body {
   position: absolute;
   left: -28px;
   top: 50%;
-  opacity: 0;
+  opacity: 1;
   transform: translateY(-50%);
-  transition: opacity 160ms ease, transform 160ms ease;
+  transition: background 160ms ease;
 }
 
-.date-timeline-view .todo-card:hover .tag-check-control,
-.date-timeline-view .todo-card:focus-within .tag-check-control,
-.date-timeline-view .todo-card.is-selected .tag-check-control {
-  opacity: 1;
-  transform: translateY(-50%) translateX(-2px);
+.date-timeline-view .tag-check-control input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
 }
 
 .week-timeline {
